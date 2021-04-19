@@ -10,6 +10,10 @@ app.get('/', (req, res)=> res.send("hey there"));
 //un callback
 io.on('connection', (socket)=>{
     console.log('usuario conectado');
+    socket.on('message', (msg)=>{
+        console.log(msg);
+        socket.broadcast.emit('message-broadcast', msg);
+    });
 });
 
 http.listen(3000, ()=>{
