@@ -1,3 +1,4 @@
+import { element } from 'protractor';
 import { Component, OnInit } from '@angular/core';
 import { io } from 'socket.io-client';
 const SOCKET_ENDPOINT = 'localhost:3000';
@@ -32,6 +33,14 @@ export class ChatInboxComponent implements OnInit {
 
     SendMessage(){
       this.socket.emit('message', this.message);
+      console.log('enviando mensaje', this.message);
+      const element = document.createElement('li');
+      element.innerHTML = this.message;
+      element.style.background = 'white';
+      element.style.padding =  '15px 30px';
+      element.style.margin = '10px';
+      element.style.textAlign = 'right';
+      document.getElementById('message-list')?.appendChild(element);
       this.message = '';
     }
 
